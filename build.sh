@@ -2,7 +2,7 @@
 
 #
 # Build Docker image for cpuminer-opt and optionally push to DockerHub
-# See 
+# See https://github.com/JayDDee/cpuminer-opt/releases
 #
 
 set -e
@@ -12,7 +12,7 @@ usage_print() {
 	echo "-n | --no-cache Optional. If present, pass --no-cache to docker build command."
 	echo "-u | --username <username> Optional. Username to be created for the container. Defaults to admin."
 	echo "-v | --version <version> Optional. cpuminer-opt version (see https://github.com/JayDDee/cpuminer-opt/releases). Omit the 'v'. Defaults to 3.16.2."
-	echo "-p | --push Optional. Push to DockerHub. Used by the author; requires 'docker login' with proper credentials."
+	echo "-p | --push Optional. Push to DockerHub. This will not work for everyone since it requires 'docker login'."
 }
 
 no_cache=""
@@ -43,6 +43,7 @@ do
         -h | --help)
             usage_print
             exit 1
+            ;;
         *)
             echo "Unknown argument: $1"
             usage_print
@@ -51,7 +52,7 @@ do
     esac
 done
 
-echo "Build Docker image dtsmith2001/cpuminer-opt:v${version} using version v${version}".
+echo "Build Docker image dtsmith2001/cpuminer-opt:v${version} using version v${version} with username ${username}."
 
 docker build ${no_cache} --build-arg username=${username} --build-arg cpuminer_opt_version=${version} --tag dtsmith2001/cpuminer-opt:v${version} -f cpuminer-opt.dockerfile .
 
