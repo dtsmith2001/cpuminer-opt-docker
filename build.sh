@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 #
-# Build Docker image for cpuminer-opt and optionally push to DockerHub
+# Build Docker image for cpuminer-opt and optionally push to DockerHub.
+#
+# The version of the Docker image corresponds to the release version.
 # See https://github.com/JayDDee/cpuminer-opt/releases
 #
 
@@ -61,6 +63,8 @@ echo "Build successful. Use 'docker run --rm -it dtsmith2001/cpuminer-opt:v${ver
 if [ ${will_push} -eq 1 ]
 then
 	echo "Push to dtsmith2001/cpuminer-opt:v${version}"
+	
     docker push dtsmith2001/cpuminer-opt:v${version}
+    
     echo "Successfully pushed to DockerHub".
 fi
