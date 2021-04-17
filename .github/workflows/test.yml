@@ -27,37 +27,37 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build with default options
-        run: /bin/bash build.sh
+        run: ./build.sh
 
       # Runs a set of commands using the runners shell
       - name: Build with specific version
-        run: /bin/bash build.sh --version 3.16.1
+        run: ./build.sh --version 3.16.1
         
       # Runs a set of commands using the runners shell
       - name: Build with specific version
-        run: /bin/bash build.sh -v 3.16.1
+        run: ./build.sh -v 3.16.1
 
       # Runs a single command using the runners shell
       - name: Build with no caching
-        run: /bin/bash build.sh --no-cache
+        run: ./build.sh --no-cache
 
       # Runs a single command using the runners shell
       - name: Build with no caching
-        run: /bin/bash build.sh -n
+        run: ./build.sh -n
 
       # Runs a single command using the runners shell
       - name: Build with specific user name
-        run: /bin/bash build.sh --username test
+        run: ./build.sh --username test
 
       # Runs a single command using the runners shell
       - name: Build with specific user name
-        run: /bin/bash build.sh -u test
+        run: ./build.sh -u test
 
       # Runs a single command using the runners shell
       - name: Build with specific user name, no caching, and specific version
-        run: /bin/bash build.sh --no-cache --version 3.16.1 --username test
+        run: ./build.sh --no-cache --version 3.16.1 --username test
 
       # Runs a single command using the runners shell
       - name: Build with specific user name, no caching, and specific version
-        run: /bin/bash build.sh -n -v 3.16.1 -u test
+        run: ./build.sh -n -v 3.16.1 -u test
   
