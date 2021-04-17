@@ -20,6 +20,7 @@ usage_print() {
 no_cache=""
 version="3.16.2"
 will_push=0
+username="admin"
 while [ $# -ge 1 ]
 do
     case "$1" in
@@ -38,7 +39,6 @@ do
             shift
             ;;
         -p | --push)
-            shift
             will_push=1
             shift
             ;;
@@ -56,7 +56,7 @@ done
 
 echo "Build Docker image dtsmith2001/cpuminer-opt:v${version} using version v${version} with username ${username}."
 
-docker build ${no_cache} --build-arg username=${username} --build-arg cpuminer_opt_version=${version} --tag dtsmith2001/cpuminer-opt:v${version} -f cpuminer-opt.dockerfile .
+docker build ${no_cache} --build-arg username=${username} --build-arg version=${version} --tag dtsmith2001/cpuminer-opt:v${version} -f cpuminer-opt.dockerfile .
 
 echo "Build successful. Use 'docker run --rm -it dtsmith2001/cpuminer-opt:v${version}'"
 

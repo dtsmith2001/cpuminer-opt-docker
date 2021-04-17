@@ -1,11 +1,12 @@
 FROM ubuntu:20.04
 
-# docker push dtsmith2001/cpuminer-opt:tagname
-
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG username
-ARG cpuminer_opt_version=3.16.2
+ARG username=admin
+ARG version=3.16.2
+
+ENV user_name=${username}
+ENV cpuminer_opt_version=${version}
 
 RUN apt update && apt upgrade -y && \
 	apt -y install \
@@ -17,13 +18,14 @@ RUN apt update && apt upgrade -y && \
 	libjansson-dev \
 	libgmp-dev \
 	zlib1g-dev \
-	git
+	git \
+	nano
 
-RUN useradd -ms /bin/bash ${username}
+RUN useradd -m -s /bin/bash ${user_name} && \
+	usermod -aG sudo ${user_name} && \
+	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-RUN mkdir -p /home/${username}
-
-WORKDIR /home/${username}
+WORKDIR /home/${user_name}
 
 RUN curl -sS -L https://github.com/JayDDee/cpuminer-opt/archive/refs/tags/v${cpuminer_opt_version}.tar.gz -o - | tar xz
 
@@ -31,6 +33,6 @@ RUN cd cpuminer-opt-${cpuminer_opt_version} && \
 	./autogen.sh && \
 	CFLAGS="-O3 -march=native -Wall" ./configure --with-curl && \
 	make && make install
-RUN chown -R ${username}.${username} cpuminer-opt-${cpuminer_opt_version}
+RUN chown -R ${user_name}.${user_name} /home/${user_name}
 
-USER ${username}
+USER ${user_name}
