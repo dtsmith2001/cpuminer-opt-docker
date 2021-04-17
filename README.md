@@ -1,6 +1,20 @@
 # cpuminer-opt-docker
 
-Docker image for [cpuminer-opt](https://github.com/JayDDee/cpuminer-opt). Based on Ubuntu 20.04 LTS
+Docker image for [cpuminer-opt](https://github.com/JayDDee/cpuminer-opt). Based on Ubuntu 20.04 LTS.
+
+To use this image, please install Docker using
+
+```bash
+sudo apt install docker.io
+```
+
+Add yourself to the `docker` group
+
+```bash
+sudo usermod -aG docker $(whoami)
+```
+
+Log out and log back in.
 
 # Obtaining the image
 
@@ -9,6 +23,16 @@ The version tag follows the cpuminer-opt [release tags](https://github.com/JayDD
 ```bash
 docker pull dtsmith2001/cpuminer-opt:<version>
 ```
+
+Then
+
+```bash
+docker run --rm -it dtsmith2001/cpuminer-opt:v3.16.2
+```
+
+At this point you are ready to use `cpuminer-opt` to mine your favorite cryptocurrencies.
+
+If you make a mistake, just `exit` the container. The container is removed since we have specified `--rm`. Then you can start a fresh container.
 
 # Building the image locally
 
