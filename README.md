@@ -12,4 +12,4 @@ docker pull dtsmith2001/cpuminer-opt:<version>
 
 # Building the image locally
 
-Use `build.sh`.
+Use [`build.sh`](https://github.com/dtsmith2001/cpuminer-opt-docker/blob/main/build.sh).
