@@ -8,6 +8,7 @@ set -e
 
 no_cache=""
 version="3.16.2"
+will_push=0
 while [ $# -ge 1 ]
 do
     case "$1" in
