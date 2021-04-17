@@ -1,4 +1,4 @@
-# cpuminer-opt-docker
+# Build cpuminer-opt and Mine Cryptocurrency
 
 Docker image for [cpuminer-opt](https://github.com/JayDDee/cpuminer-opt). Based on Ubuntu 20.04 LTS.
 
