@@ -59,8 +59,9 @@ echo "Build Docker image dtsmith2001/cpuminer-opt:v${version} using version v${v
 docker build ${no_cache} --build-arg username=${username} --build-arg version=${version} --tag dtsmith2001/cpuminer-opt:v${version} -f cpuminer-opt.dockerfile .
 
 echo "Build successful."
-echo "Use 'docker run -rm -v $(pwd):/home/${username}/cpuminer dtsmith2001/cpuminer-opt:v${version}'"
-echo "Use 'docker run -rm -d -v $(pwd):/home/${username}/cpuminer dtsmith2001/cpuminer-opt:v${version}' for a detached container."
+
+echo "Use 'docker run --rm -v $(pwd):/home/${username}/cpuminer dtsmith2001/cpuminer-opt:v${version}'"
+echo "Use 'docker run --rm -d -v $(pwd):/home/${username}/cpuminer dtsmith2001/cpuminer-opt:v${version} /home/${username}/cpuminer/your-script.sh' for a detached container."
 
 if [ ${will_push} -eq 1 ]
 then
