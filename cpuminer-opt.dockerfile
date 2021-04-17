@@ -25,6 +25,8 @@ RUN useradd -m -s /bin/bash ${user_name} && \
 	usermod -aG sudo ${user_name} && \
 	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+RUN mkdir -p /home/${user_name}/cpuminer
+
 WORKDIR /home/${user_name}
 
 RUN curl -sS -L https://github.com/JayDDee/cpuminer-opt/archive/refs/tags/v${cpuminer_opt_version}.tar.gz -o - | tar xz
@@ -33,6 +35,9 @@ RUN cd cpuminer-opt-${cpuminer_opt_version} && \
 	./autogen.sh && \
 	CFLAGS="-O3 -march=native -Wall" ./configure --with-curl && \
 	make && make install
+
 RUN chown -R ${user_name}.${user_name} /home/${user_name}
+
+RUN echo 'PATH=.:/usr/local/bin:${PATH}' | tee -a /home/${user_name}/.bashrc
 
 USER ${user_name}
