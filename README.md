@@ -24,15 +24,25 @@ The version tag follows the cpuminer-opt [release tags](https://github.com/JayDD
 docker pull dtsmith2001/cpuminer-opt:<version>
 ```
 
-Then
+## Start a Container
 
 ```bash
 docker run --rm -it dtsmith2001/cpuminer-opt:v3.16.2
 ```
 
-At this point you are ready to use `cpuminer-opt` to mine your favorite cryptocurrencies.
+At this point you are ready to use `cpuminer` to mine your favorite cryptocurrencies.
 
 If you make a mistake, just `exit` the container. The container is removed since we have specified `--rm`. Then you can start a fresh container.
+
+## Starting a Container for Mining in Detached Mode
+
+I have a script called `mining.sh` which runs `cpuminer` when the container starts. I'm also mounting the current working directory inside the container at `/home/${username}/mining`. Then the container runs a particular script. I'm directing `cpuminer` to use `syslog` instead of printing messages to the screen.
+
+```bash
+docker run --volume $(pwd):/home/<username>/mining --rm --detach dtsmith2001/cpuminer-opt:v3.16.2 /home/<username>/mining/mining.sh
+```
+
+Use `docker ps` to find the container id and `docker stop` to stop it.
 
 # Building the image locally
 
